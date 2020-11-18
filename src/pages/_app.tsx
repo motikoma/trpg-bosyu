@@ -1,26 +1,27 @@
 
 import React,{useEffect} from "react";
 import '../../styles/globals.css';
-import {
-  ThemeProvider as MaterialUIThemeProvider,
-  StylesProvider
-} from '@material-ui/styles'
+import { ThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { AppProps } from 'next/app';
 import theme from "../../styles/theme";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles && jssStyles.parentNode) {
+    if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
   }, [])
+
   return (
-    <MaterialUIThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </MaterialUIThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
   );
 }
 
