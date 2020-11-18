@@ -1,11 +1,12 @@
 import React,{useState} from "react";
 import html2canvas from "html2canvas";
 import {makeStyles} from "@material-ui/core/styles";
-import { TextField, TextareaAutosize, Button } from "@material-ui/core";
+import { TextField, Button, Grid, Box, Typography, Container } from "@material-ui/core";
 import Card from "./Card";
 
-// TODO: 画像ダウンロード機能を実装する
+// TODO: 更新したらバグるのを修正する。よくわからない...
 // TODO: 見た目を整える：スタイルはHooks式で実装する
+// TODO: テキストエリアに記載した改行を反映できるようにする
 // TODO: 動的に行を追加できるようにする
 
 const Form: React.FC<{}> = () => {
@@ -65,21 +66,44 @@ const Form: React.FC<{}> = () => {
     }
 
     return (
-        <>
-            <section>
-                <TextField label="タイトル" variant="outlined" onChange={titleHandler} />
-                <TextField label="ジャンル" variant="outlined" onChange={genreHandler}  />
-                <TextField label="シナリオ" variant="outlined" onChange={senarioHandler}  />
-                <TextField label="募集人数" variant="outlined" onChange={recruitingCountHandler}  />
-                <TextField label="形式" variant="outlined" onChange={formatHandler}  />
-                <TextField label="使用ツール" variant="outlined" onChange={toolHandler}  />
-                <TextareaAutosize aria-label="empty textarea" rowsMin={10} rowsMax={20} placeholder="その他" onChange={textareaHandler} />
-                <Button variant="contained" color="primary" onClick={()=>{onClickExport()}}>画像ダウンロード</Button>
-            </section>
-            <section>
-                <Card title={title} genre={genre} senario={senario} recruitingCount={recruitingCount} format={format} tool={tool} textarea={textarea} />
-            </section>
-        </>
+        <Container maxWidth="lg" fixed>
+            <Box m={6}>
+                <Typography variant="h2" component="h1" align="center">TRPG募集メーカー</Typography>
+            </Box>
+            <Grid container direction="row" justify="center" alignItems="center">
+                <Grid container item xs={12}>
+                    <section>
+                        <Box m={2}>
+                            <TextField label="タイトル" variant="outlined" onChange={titleHandler} />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="ジャンル" variant="outlined" onChange={genreHandler}  />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="シナリオ" variant="outlined" onChange={senarioHandler}  />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="募集人数" variant="outlined" onChange={recruitingCountHandler}  />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="形式" variant="outlined" onChange={formatHandler}  />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="使用ツール" variant="outlined" onChange={toolHandler}  />
+                        </Box>
+                        <Box m={2}>
+                            <TextField label="その他" variant="outlined" multiline onChange={textareaHandler} />
+                        </Box>
+                        <Button variant="contained" color="primary" onClick={()=>{onClickExport()}}>画像ダウンロード</Button>
+                    </section>
+                </Grid>
+                <Grid container item xs={12}>
+                    <section>
+                        <Card title={title} genre={genre} senario={senario} recruitingCount={recruitingCount} format={format} tool={tool} textarea={textarea} />
+                    </section>
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 

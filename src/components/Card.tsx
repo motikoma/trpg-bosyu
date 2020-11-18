@@ -1,4 +1,6 @@
-import React from "react";
+import { Typography } from "@material-ui/core";
+import React,{useState} from "react";
+
 
 type Props = {
     title: string;
@@ -13,7 +15,7 @@ type Props = {
 const Card: React.FC<Props> = ({title,genre,senario,recruitingCount,format,tool,textarea}) => {
     return (
         <div id="target-component">
-            <h1>{title}</h1>
+            <Typography>{title}</Typography>
             <ul>
                 <li>ジャンル：{genre}</li>
                 <li>シナリオ：{senario}</li>
